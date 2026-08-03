@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", ui-serif, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-ink: #0b131a;
+  --color-bg: #0f1720;
+  --color-surface: #16212c;
+  --color-surface-2: #1d2a37;
+  --color-surface-3: #24313f;
+  --color-border: #2a3a48;
+  --color-border-soft: #223140;
+
+  --color-paper: #f4f1e9;
+  --color-text: #ecebe4;
+  --color-text-dim: #b8c0c9;
+  --color-text-muted: #7d8a97;
+
+  --color-gold: #d4a94a;
+  --color-gold-soft: #e8cf94;
+  --color-wine: #c1495b;
+  --color-wine-soft: #dd8792;
+  --color-slate: #5b8aa6;
+  --color-violet: #8577ab;
+  --color-sage: #6fa787;
+  --color-clay: #c97b4a;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-bg);
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-bg text-text antialiased;
+    font-family: var(--font-sans);
+    background-image:
+      radial-gradient(1200px 600px at 15% -10%, rgba(212, 169, 74, 0.06), transparent 60%),
+      radial-gradient(900px 500px at 100% 10%, rgba(91, 138, 166, 0.05), transparent 55%);
+    background-attachment: fixed;
+  }
+  ::selection {
+    background: rgba(212, 169, 74, 0.35);
+    color: #fff;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-surface-3) transparent;
+  }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-thumb { background: var(--color-surface-3); border-radius: 8px; }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-mono-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+  .ledger-lines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 46px,
+      var(--color-border-soft) 46px,
+      var(--color-border-soft) 47px
+    );
+  }
+
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
